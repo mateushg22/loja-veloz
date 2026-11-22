@@ -2,7 +2,7 @@
 
 **Disciplina:** Cloud DevOps  
 **Aluno:** Mateus Henrique Gomes | **RA:** 125071  
-**Vídeo Pitch (YouTube):** [COLE O SEU LINK AQUI]
+**Vídeo Pitch (YouTube):** https://youtu.be/JuQ6rVIM6xo
 
 ## Arquitetura da Solução
 Projeto de modernização da plataforma de e-commerce **Loja Veloz**, contemplando ambiente local reproduzível com Docker Compose, imagem conteinerizada multi-stage sem privilégios de root, manifestos de produção em Kubernetes (Deployment, Service, ConfigMap, Secret, Probes e HPA), pipeline automatizada no GitHub Actions e esqueleto de IaC com Terraform.
