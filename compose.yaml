@@ -1,0 +1,48 @@
+networks:
+  veloz-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: veloz-postgres
+    environment:
+      POSTGRES_DB: pedidos_db
+      POSTGRES_USER: user_veloz
+      POSTGRES_PASSWORD: secret_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - veloz-net
+
+  api-gateway:
+    image: nginx:alpine
+    container_name: veloz-gateway
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - servico-pedidos
+    networks:
+      - veloz-net
+
+  servico-pedidos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: veloz-pedidos
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - veloz-net
